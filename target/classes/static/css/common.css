@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	position: relative;
+	padding-top: 100px;
+	padding-bottom: 80px;
+	box-sizing: border-box;
+}
+
+/* 共有フッター */
+.footer {
+	width: 100%;
+	background-color: darkgray;
+	color: white;
+	position: absolute;
+	bottom: 0;
+	height: 50px;
+	text-align: center;
+}
+
+.copy-right {
+	font-size: 15px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform:
+		translateX(-50%);
+	-ms-transform: translateX(-50%);
+}
+
+/* 共通ヘッダー */
+.header {
+	width: 100%;
+	background-color: #27acd9;
+	color: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 80px;
+}
+
+.logo {
+	width: 230px;
+	position: absolute;
+	top: 50%;
+	left: 15px;
+	transform: translateY(-50%);
+	-webkit-transform:
+		translateY(-50%);
+	-ms-transform: translateY(-50%);
+}
+
+.header-system-name {
+	font-size: 20px;
+	position: absolute;
+	top: 65%;
+	left: 250px;
+	transform: translateY(-50%);
+	-webkit-transform:
+		translateY(-50%);
+	-ms-transform: translateY(-50%);
+}
+
+.header-title-name {
+	font-size: 28px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform:
+		translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+
+/*ボタン関連*/
+.btn-area-center {
+	width: auto;
+	margin: auto;
+	text-align: center;
+	padding-top: 50px;
+	padding-top: 50px;
+}
+
+.menu-btn {
+	width: 300px;
+	height: 75px;
+	margin: 20px;
+	padding: 20px 40px;
+	font-weight: bold;
+	border: 1px solid #27acd9;
+	border-radius:
+		100vw;
+	color: white;
+	cursor: pointer;
+	position: relative;
+	font-size: 25px;
+	overflow: hidden;
+	z-index: 1;
+	background-color: #27acd9;
+	cursor:
+		pointer;
+}
+
+.back-btn {
+	width: 250px;
+	background-color: #333;
+	color: #fff;
+	font-weight: bold;
+	margin: 20px 20px;
+	font-size: 16px;
+	padding: 15px;
+	border-radius: 100vh;
+	border: none;
+	appearance:
+		none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	cursor: pointer;
+}
+
+.btn-family {
+	display: flex;
+	justify-content: center;
+}
+
+/***ページング機能***/
+.paging-table {
+	margin: 0px auto 10px auto;
+	display: block;
+}
+
+.paging-table a {
+	display: inline-block;
+	color: #27acd9;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.paging-table span {
+	display: inline-block;
+	color: black;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+/***ログイン機能***/
+.login-table {
+	background-color: #aadaea;
+	margin: 50px auto auto;
+	width: 700px;
+	height: 120px;
+	border-radius: 10px;
+	padding-top: 40px;
+	padding-bottom: 20px;
+	
+}
+
+.input-table {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.login-btn {
+	font-size: 20px;
+	padding: 10px 20px;
+	margin: 0 auto;
+	display: block;
+	border-radius: 10px;
+}
+
+.login-btn:hover {
+	opacity: 0.5;
+}
+
+.account-register-table {
+	text-align: center;
+}
+
+.account-register {
+	display: inline-block;
+}
+
+.account-register a {
+	color: #27acd9;
+}
+
+.account-table {
+	background-color: #aadaea;
+	margin: 50px auto auto;
+	width: 600px;
+	height: 170px;
+	border-radius: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}

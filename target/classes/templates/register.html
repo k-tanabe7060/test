@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>新規アカウント登録</title>
+	<link href="css/common.css" rel="stylesheet" type="text/css">
+	<link href="css/stock_system.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<header th:replace="utils/header::header_block(title='新規アカウント登録')"></header>
+	<footer th:replace="utils/footer::footer_block(| |)"></footer>
+
+	<form th:action="@{/register}" method="post" class="account-table">
+		<div class="input-table">
+			<label for="username">ユーザー名（アルファベットと数字が使用できます）</label><br>
+			<input type="text" id="username" name="username" required><br>
+
+			<label for="password">パスワード（アルファベットと数字が使用できます）</label><br>
+			<input type="password" id="password" name="password" required><br>
+		</div>
+		<input type="submit" value="登録" class="login-btn">
+	</form>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>商品情報詳細</title>
+	<link href="/css/common.css" rel="stylesheet" type="text/css">
+	<link href="/css/stock_system.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+	<header th:replace="utils/header::header_block(title='商品情報詳細')"></header>
+	<footer th:replace="utils/footer::footer_block(| |)"></footer>
+	<div class="error-msg">
+		<span th:if="${itemInfoForm.errMsg}" th:text="${itemInfoForm.errMsg}">エラーメッセージ</span>
+	</div>
+	<div th:unless="${itemInfoForm.errMsg}" class="block-detail">
+		<form th:action="@{/itemDelete}" method="post" th:object="${itemInfoForm}" id="itemDeleteForm">
+			<table>
+				<tr>
+					<th>商品ID</th>
+					<td> 
+						<input type="hidden" th:field="*{itemId}">
+						<span th:text="*{itemId}"></span>
+					</td>
+				</tr>
+				<tr>
+					<th>商品名</th>
+					<td th:text="*{itemName}"></td>
+				</tr>
+				<tr>
+					<th>区分</th>
+					<td th:text="*{itemKubun}"></td>
+				</tr>
+				<tr>
+					<th>メーカー</th>
+					<td th:text="*{maker}"></td>
+				</tr>
+				<tr>
+					<th>JANコード</th>
+					<td th:text="*{jancd}"></td>
+				</tr>
+				<tr>
+					<th>購入単価</th>
+					<td th:text="*{purchaseUnitPrice} + 円"></td>
+				</tr>
+				<tr>
+					<th>販売単価</th>
+					<td th:text="*{salesUnitPrice} + 円"></td>
+				</tr>
+				<tr>
+					<th>保管場所</th>
+					<td th:text="*{storageLocation}"></td>
+				</tr>
+				<tr>
+					<th>入庫日</th>
+					<td th:text="*{receiptDate}"></td>
+				</tr>
+				<tr>
+					<th>作成者</th>
+					<td th:text="*{createUser}"></td>
+				</tr>
+				<tr>
+					<th>作成日時</th>
+					<td th:text="*{createDate}"></td>
+				</tr>
+				<tr>
+					<th>更新者</th>
+					<td th:text="*{updateUser}"></td>
+				</tr>
+				<tr>
+					<th>更新日時</th>
+					<td th:text="*{updateDate}"></td>
+				</tr>
+			</table><br>
+		</form>
+		<div class="btn-form">
+			<input type="submit" name="insert" value="商品削除" class="btn" form="itemDeleteForm" />
+		</div>
+	</div>
+
+	<div class="btn-family">
+		<button type="button" class="back-btn" onclick="location.href='/'">HOMEへ戻る</button>
+
+		<!--旧バージョン・戻るボタン-->
+		<!--		<form method="get" th:action="@{/returnPageToItemList}">-->
+		<!--			<input type="submit" name="insert" value="戻る" class="back-btn" />-->
+		<!--		</form>-->
+
+		<!--シンプル戻るボタン-->
+		<button class="back-btn" onclick="history.back()">戻る</button>
+	</div>
+
+</body>
+
+</html>

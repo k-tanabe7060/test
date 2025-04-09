@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ログイン画面</title>
+	<link href="css/common.css" rel="stylesheet" type="text/css">
+	<link href="css/stock_system.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<header th:replace="utils/header::header_block(title='ログイン画面')"></header>
+	<footer th:replace="utils/footer::footer_block(| |)"></footer>
+	<div class="login-table">
+		<div th:if="${param.error}">
+			<p>ユーザー名またはパスワードが異なります</p>
+		</div>
+
+		<div th:if="${param.logout}">
+			<p>You have been logged out.</p>
+		</div>
+		
+		<div>
+			<form th:action="@{/login}" method="post">
+				<div class="input-table">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<label>ユーザー名：</label>
+					<input type="text" name="username" required /><br>
+					<label>パスワード：</label>
+					<input type="password" name="password" required />
+				</div>
+				<button type="submit" class="login-btn">ログイン</button>
+			</form>
+		</div>
+	</div>
+	<div class="account-register-table">
+		<p class="account-register">アカウントを作成する</p>
+		<p class="account-register">
+			<a th:href="@{ /register}">新規登録</a>
+		</p><!-- 新規アカウント作成ページへのリンクを追加 -->
+	</div>
+</body>
+
+</html>

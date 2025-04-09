@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<title>商品情報登録</title>
+	<link href="/css/common.css" rel="stylesheet" type="text/css">
+	<link href="/css/stock_system.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<header th:replace="utils/header::header_block(title='商品情報登録')"></header>
+	<footer th:replace="utils/footer::footer_block(| |)"></footer>
+	
+	<div class="error-msg">
+		<span th:if="${itemInfoForm.errMsg}" th:text="${itemInfoForm.errMsg}">エラーメッセージ</span>
+	</div>
+	<div class="block-detail">
+		<form th:action="@{/itemCreate}" method="post" th:object="${itemInfoForm}" id="itemCreateForm">
+			<table>
+				<tr>
+					<th>商品名</th>
+					<td>
+						<input type="text" th:field="*{itemName}"><br>
+						<span style="color: red;" th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}">haserror</span>
+					</td>
+				</tr>
+				<tr>
+					<th>区分</th>
+					<td>
+						<select th:field="*{itemKubun}" type="hidden">
+							<option value="1">国産たばこ</option>
+							<option value="2">輸入たばこ</option>
+							<option value="3">デバイス</option>
+							<option value="4">喫煙具</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>メーカー</th>
+					<td>
+						<input type="text" th:field="*{maker}"><br>
+						<span style="color: red;" th:if="${#fields.hasErrors('maker')}" th:errors="*{maker}">haserror</span>
+					</td>
+				</tr>
+				<tr>
+					<th>JANコード</th>
+					<td>
+						<input type="text" th:field="*{jancd}"><br>
+						<span style="color: red;" th:if="${#fields.hasErrors('jancd')}" th:errors="*{jancd}">haserror</span>
+					</td>
+				</tr>
+				<tr>
+					<th>購入単価</th>
+					<td>
+						<input type="text" th:field="*{purchaseUnitPrice}"><br>
+						<span style="color: red;" th:if="${#fields.hasErrors('purchaseUnitPrice')}" th:errors="*{purchaseUnitPrice}">haserror</span>
+					</td>
+				</tr>
+				<tr>
+					<th>販売単価</th>
+					<td>
+						<input type="text" th:field="*{salesUnitPrice}"><br>
+						<span style="color: red;" th:if="${#fields.hasErrors('salesUnitPrice')}" th:errors="*{salesUnitPrice}">haserror</span>
+					</td>
+				</tr>
+				<tr>
+					<th>保管場所</th>
+					<td>
+						<input type="text" th:field="*{storageLocation}"><br>
+						<span style="color: red;" th:if="${#fields.hasErrors('storageLocation')}" th:errors="*{storageLocation}">haserror</span>
+					</td>
+				</tr>
+			</table><br>
+		</form>
+		<div class="btn-form">
+			<input type="submit" value="登録" class="btn" form="itemCreateForm">
+		</div>
+	</div>
+	<!--戻るボタン-->
+	<div class="btn-family">
+		<button type="button" class="back-btn" onclick="location.href='/'">HOMEへ戻る</button>
+		<!--旧バージョン戻るボタン-->
+		<!--		<form method="get" th:action="@{/returnPageToItemList}">-->
+		<!--			<input type="submit" name="insert" value="戻る" class="back-btn" />-->
+		<!--		</form>-->
+		
+		<!--シンプル戻るボタン-->
+		<button class="back-btn" onclick="history.back()">戻る</button>
+	</div>
+	<!-------------->
+</body>
+
+</html>

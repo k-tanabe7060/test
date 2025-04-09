@@ -1,0 +1,340 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- resultMap=""には、SQLのSELECT結果をJavaのオブジェクトにマッピングするための設定を書く -->
+<mapper
+	namespace="com.freeks.training.stockSystem.mapper.ItemInfoMapper">
+	<!-- 全リスト取得用 -->
+	<resultMap
+		type="com.freeks.training.stockSystem.entity.ItemInfoEntity"
+		id="itemInfo">
+		<id property="itemId" column="item_id"></id>
+		<result property="itemName" column="item_name"></result>
+		<result property="itemKubun" column="kubun_name"></result>
+		<result property="maker" column="maker"></result>
+		<result property="jancd" column="jancd"></result>
+		<result property="purchaseUnitPrice"
+			column="purchase_unit_price"></result>
+		<result property="salesUnitPrice" column="sales_unit_price"></result>
+		<result property="storageLocation" column="storage_location"></result>
+		<result property="receiptDate" column="receipt_date"></result>
+		<result property="createUser" column="create_user"></result>
+		<result property="createDate" column="create_date"></result>
+		<result property="updateUser" column="update_user"></result>
+		<result property="updateDate" column="update_date"></result>
+	</resultMap>
+
+	<!-- itemIdで商品情報取得 -->
+	<resultMap
+		type="com.freeks.training.stockSystem.entity.ItemInfoEntity"
+		id="getInfoByItemId">
+		<id property="itemId" column="item_id"></id>
+		<result property="itemName" column="item_name"></result>
+		<result property="itemKubun" column="item_kubun"></result>
+		<result property="maker" column="maker"></result>
+		<result property="jancd" column="jancd"></result>
+		<result property="purchaseUnitPrice"
+			column="purchase_unit_price"></result>
+		<result property="salesUnitPrice" column="sales_unit_price"></result>
+		<result property="storageLocation" column="storage_location"></result>
+		<result property="receiptDate" column="receipt_date"></result>
+		<result property="createUser" column="create_user"></result>
+		<result property="createDate" column="create_date"></result>
+		<result property="updateUser" column="update_user"></result>
+		<result property="updateDate" column="update_date"></result>
+	</resultMap>
+
+	<!-- 在庫詳細【取得】 -->
+	<resultMap
+		type="com.freeks.training.stockSystem.entity.ItemStockEntity"
+		id="itemStockInfo">
+		<id property="storageStockId" column="storage_stock_id"></id><!-- 在庫ID -->
+		<id property="itemId" column="item_id"></id><!-- 商品ID -->
+		<result property="stockQuantity" column="stock_quantity"></result><!-- 在庫数 -->
+		<result property="receiveQuantity" column="receive_quantity"></result><!-- 入庫数 -->
+		<result property="dispatchQuantity" column="dispatch_quantity"></result><!-- 出庫数 -->
+		<result property="storageLocation" column="storage_location"></result><!-- 保管場所 -->
+		<result property="createUser" column="create_user"></result><!-- 作成者 -->
+		<result property="createDate" column="create_date"></result><!-- 作成日時 -->
+		<result property="updateUser" column="update_user"></result><!-- 更新者 -->
+		<result property="updateDate" column="update_date"></result><!-- 更新日時 -->
+	</resultMap>
+
+	<!-- 全リスト取得用 -->
+	<select id="getFindAll" resultMap="itemInfo">
+		SELECT
+		mi.item_id,
+		mi.item_name,
+		mk.kubun_name,
+		mi.maker,
+		mi.jancd,
+		mi.purchase_unit_price,
+		mi.sales_unit_price,
+		mi.storage_location,
+		mi.receipt_date,
+		mi.create_user,
+		mi.create_date,
+		mi.update_user,
+		mi.update_date
+		FROM
+		stock_system.m_item mi
+		Inner join
+		stock_system.m_kubun mk
+		ON
+		mi.item_kubun = mk.kubun_cd
+		AND
+		mk.logical_delete_flg = false
+		WHERE
+		mi.logical_delete_flg = false
+		ORDER
+		BY mi.item_id ASC;
+
+	</select>
+
+	<!-- ページング機能用全件取得 -->
+	<select id="getPagingInfo" resultMap="itemInfo">
+		SELECT
+		mi.item_id,
+		mi.item_name,
+		mk.kubun_name,
+		mi.maker,
+		mi.jancd,
+		mi.purchase_unit_price,
+		mi.sales_unit_price,
+		mi.storage_location,
+		mi.receipt_date,
+		mi.create_user,
+		mi.create_date,
+		mi.update_user,
+		mi.update_date
+		FROM
+		stock_system.m_item mi
+		Inner join
+		stock_system.m_kubun mk
+		ON
+		mi.item_kubun = mk.kubun_cd
+		AND
+		mk.logical_delete_flg = false
+		WHERE
+		mi.logical_delete_flg = false
+		ORDER
+		BY mi.item_id ASC
+		LIMIT #{size}
+		OFFSET #{offset}
+		;
+	</select>
+
+	<!-- itemIdで商品一覧【取得】 -->
+	<select id="findByItemId" resultMap="getInfoByItemId">
+		SELECT
+		mi.item_id
+		,
+		mi.item_name
+		, mi.item_kubun
+		, mi.maker
+		, mi.jancd
+		,
+		mi.purchase_unit_price
+		, mi.sales_unit_price
+		, mi.storage_location
+		,
+		mi.receipt_date
+		, mi.create_user
+		, mi.create_date
+		, mi.update_user
+		,
+		mi.update_date
+		FROM stock_system.m_item mi
+		WHERE item_id = #{itemId}
+		AND
+		logical_delete_flg = false;
+	</select>
+
+	<!-- itemNameで商品一覧【取得】 -->
+	<select id="findByItemName" resultMap="getInfoByItemId">
+		SELECT
+		mi.item_id
+		,
+		mi.item_name
+		, mi.item_kubun
+		, mi.maker
+		, mi.jancd
+		,
+		mi.purchase_unit_price
+		, mi.sales_unit_price
+		, mi.storage_location
+		,
+		mi.receipt_date
+		, mi.create_user
+		, mi.create_date
+		, mi.update_user
+		,
+		mi.update_date
+		FROM stock_system.m_item mi
+		WHERE item_name = #{itemName}
+		AND
+		logical_delete_flg = false;
+	</select>
+
+	<!-- 在庫情報取得 -->
+	<select id="findStockByItemId" resultMap="itemStockInfo">
+		SELECT
+		storage_stock_id
+		, item_id
+		, stock_quantity
+		, receive_quantity
+		, dispatch_quantity
+		,
+		storage_location
+		, create_user
+		, create_date
+		, update_user
+		, update_date
+		FROM
+		stock_system.storage_stock
+		WHERE item_id =
+		#{itemId}
+		AND
+		logical_delete_flg = false;
+	</select>
+
+	<!-- ログイン機能（ユーザーID検索用） -->
+	<select id="findByUserName">
+		SELECT username
+		FROM stock_system.users
+		WHERE
+		username = #{username};
+	</select>
+
+	<!-- 商品情報【更新】 -->
+	<update id="updateItemInfo">
+		UPDATE stock_system.m_item
+		SET update_date =
+		#{updateDate},
+		update_user = #{updateUser},
+		storage_location =
+		#{storageLocation},
+		version = version + 1
+		WHERE item_id =
+		#{itemId}
+		AND
+		logical_delete_flg = false
+		AND version = (
+		SELECT version
+		FROM
+		stock_system.m_item
+		WHERE
+		item_id = #{itemId}
+		);
+	</update>
+
+	<!-- 在庫【更新】 -->
+	<update id="updateStock">
+		UPDATE stock_system.storage_stock
+		SET receive_quantity
+		= #{receiveQuantity},
+		dispatch_quantity = #{dispatchQuantity},
+		stock_quantity = #{stockQuantity},
+		storage_location =
+		#{storageLocation},
+		update_user = #{updateUser},
+		update_date =
+		#{updateDate},
+		version = version + 1
+		WHERE storage_stock_id =
+		#{storageStockId}
+		AND logical_delete_flg = false
+		AND version = (
+		SELECT
+		version
+		FROM stock_system.storage_stock
+		WHERE storage_stock_id =
+		#{storageStockId}
+		);
+	</update>
+
+	<!-- 商品【登録】 -->
+	<insert id="insert">
+		INSERT INTO stock_system.m_item (
+		item_name,
+		item_kubun,
+		maker,
+		jancd,
+		purchase_unit_price,
+		sales_unit_price,
+		storage_location,
+		receipt_date,
+		create_user,
+		create_date,
+		update_user,
+		update_date,
+		logical_delete_flg,
+		version
+		)
+		VALUES (
+		#{itemName},
+		#{itemKubun},
+		#{maker},
+		#{jancd},
+		#{purchaseUnitPrice},
+		#{salesUnitPrice},
+		#{storageLocation},
+		#{receiptDate},
+		#{createUser},
+		#{createDate},
+		#{updateUser},
+		#{updateDate},
+		#{logicalDeleteFlg},
+		#{version}
+		);
+	</insert>
+
+	<!-- 在庫【登録】 -->
+	<insert id="stockInsert">
+		INSERT INTO stock_system.storage_stock (
+		item_id,
+		stock_quantity,
+		receive_quantity,
+		dispatch_quantity,
+		storage_location,
+		create_user,
+		create_date,
+		update_user,
+		update_date,
+		logical_delete_flg,
+		version
+		)
+		VALUES (
+		#{itemId},
+		#{stockQuantity},
+		#{receiveQuantity},
+		#{dispatchQuantity},
+		#{storageLocation},
+		#{createUser},
+		#{createDate},
+		#{updateUser},
+		#{updateDate},
+		#{logicalDeleteFlg},
+		#{version}
+		);
+	</insert>
+
+	<!-- 商品情報【削除】 -->
+	<delete id="delete">
+		DELETE FROM stock_system.m_item WHERE
+		item_id =
+		#{itemId}
+		AND logical_delete_flg = false;
+	</delete>
+
+	<!-- 在庫情報【削除】 -->
+	<delete id="deleteStock">
+		DELETE FROM stock_system.storage_stock WHERE
+		item_id =
+		#{itemId}
+		AND logical_delete_flg = false;
+	</delete>
+
+
+</mapper>

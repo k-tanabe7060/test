@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>freeks研修システム</title>
+	<link rel="stylesheet" href="css/common.css" type="text/css">
+	<link rel="stylesheet" href="css/quiz.css" type="text/css">
+</head>
+
+<head th:replace="utils/header::header_block(title='クイズ結果')"></head>
+<footer th:replace="utils/footer::footer_block(| |)"></footer>
+
+<body>
+	<form th:action="@{/quizQuestion}" method="question" th:object="${quizForm}" class="btn-area-center">
+		<p th:text="*{resultMessage}" class="result"></p>
+		<button type="submit" class="btn-retry">もう一度挑戦する</button>
+	</form>
+	<div class="btn-area-center">
+		<button type="button" class="back-btn" onclick="location.href='/'">HOMEへ戻る</button>
+	</div>
+</body>
+
+</html>
